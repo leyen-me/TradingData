@@ -26,6 +26,7 @@ logger.info("环境变量加载完成")
 # 数据库配置
 DB_CONFIG = {
     'host': os.getenv('DB_HOST', 'localhost'),
+    'port': os.getenv('DB_PORT', 3306),
     'user': os.getenv('DB_USER', 'root'),
     'password': os.getenv('DB_PASSWORD', ''),
     'db': os.getenv('DB_NAME', 'trading_data'),
