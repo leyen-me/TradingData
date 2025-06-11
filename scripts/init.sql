@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS `t_stocks` (
 
 INSERT INTO `t_stocks` (`stock_code`, `stock_name`, `market`) VALUES
 ('TSLA.US', '特斯拉', 'US');
-
+INSERT INTO `t_stocks` (`stock_code`, `stock_name`, `market`) VALUES
+('TSLL.US', '特斯拉两倍做多', 'US');
 
 -- 实时价格表
 CREATE TABLE IF NOT EXISTS `t_quotes` (

@@ -1,1 +1,1 @@
-SYMBOL = "TSLA.US"
+SYMBOL = "TSLL.US"
