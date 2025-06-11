@@ -108,8 +108,13 @@ def on_quote(symbol: str, event: PushQuote):
 db_thread = threading.Thread(target=database_worker, daemon=True)
 db_thread.start()
 
+logger.info("开始初始化 Longport API...")
 config = Config.from_env()
+logger.info("Longport API 配置完成")
+
+logger.info("开始创建 QuoteContext...")
 quote_ctx = QuoteContext(config)
+logger.info("QuoteContext 创建完成")
 
 
 def on_trades(symbol: str, event: PushTrades):
@@ -166,19 +171,24 @@ def on_depth(symbol: str, event: PushDepth):
 
 
 # 订阅实时价格
+logger.info("开始设置回调函数...")
 quote_ctx.set_on_quote(on_quote)
-quote_ctx.subscribe([SYMBOL], [SubType.Quote], is_first_push=True)
-
-# 订阅实时成交
 quote_ctx.set_on_trades(on_trades)
-quote_ctx.subscribe([SYMBOL], [SubType.Trade], is_first_push=True)
-
-# 订阅实时盘口
 quote_ctx.set_on_depth(on_depth)
-quote_ctx.subscribe([SYMBOL], [SubType.Depth], is_first_push=True)
+logger.info("回调函数设置完成")
 
-print(f"服务启动成功，当前时间为北京时间: {datetime.now()}")
+
+quote_ctx.subscribe([SYMBOL], [SubType.Quote], is_first_push=True)
+logger.info("Quote 订阅完成")
+
+quote_ctx.subscribe([SYMBOL], [SubType.Trade], is_first_push=True)
+logger.info("Trade 订阅完成")
+
+quote_ctx.subscribe([SYMBOL], [SubType.Depth], is_first_push=True)
+logger.info("Depth 订阅完成")
+
 logger.info("开始运行主循环")
+logger.info(f"服务启动成功，当前时间为北京时间: {datetime.now()}")
 
 try:
     while True:
