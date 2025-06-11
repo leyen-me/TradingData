@@ -187,10 +187,9 @@ logger.info("Trade 订阅完成")
 quote_ctx.subscribe([SYMBOL], [SubType.Depth], is_first_push=True)
 logger.info("Depth 订阅完成")
 
-logger.info("开始运行主循环")
-logger.info(f"服务启动成功，当前时间为北京时间: {datetime.now()}")
-
 try:
+    logger.info("开始运行主循环")
+    logger.info(f"服务启动成功，当前时间为北京时间: {datetime.now()}")
     while True:
         time.sleep(1)
 except KeyboardInterrupt:
